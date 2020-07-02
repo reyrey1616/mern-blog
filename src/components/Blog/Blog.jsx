@@ -18,6 +18,18 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 const useStyles = makeStyles({
   root: {
     padding: '.5em !important',
+    display: 'block',
+    margin: '1em',
+    border: '1px solid transparent',
+    transition: 'all 0.3s',
+
+    '&:hover': {
+      cursor: 'pointer',
+      border: '1px solid rgb(0, 102 , 204)',
+    },
+  },
+  content: {
+    padding: '.5em !important',
   },
 });
 const Blog = ({ name, dateTime, content, imageUrl, own }) => {
@@ -55,7 +67,7 @@ const Blog = ({ name, dateTime, content, imageUrl, own }) => {
         title={name}
         subheader={dateTime}
       />
-      <CardContent className={classes.root}>
+      <CardContent className={classes.content}>
         <Typography variant='body2' color='textSecondary' component='p'>
           {content}
         </Typography>
