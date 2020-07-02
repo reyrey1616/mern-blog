@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 
 // Dynamic Imports
 const LoginPage = lazy(() => import('./pages/Login/Login.page'));
+const SignupPage = lazy(() => import('./pages/Signup/Signup.page'));
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
         <BrowserRouter>
           <Navbar />
           <Switch>
-            <Route path='/' component={LoginPage} />
+            <Route path='/login' component={LoginPage} />
+            <Route path='/signup' component={SignupPage} />
           </Switch>
         </BrowserRouter>
       </Suspense>
