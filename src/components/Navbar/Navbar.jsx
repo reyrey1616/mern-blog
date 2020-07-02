@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
   MenuItem,
@@ -10,7 +9,7 @@ import {
   AppBar,
   useMediaQuery,
 } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({

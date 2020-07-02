@@ -1,0 +1,98 @@
+import React from 'react';
+import { Button, Typography } from '@material-ui/core';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { LoginFormLayout } from './LoginForm.styles';
+class LoginForm extends React.Component {
+  state = {
+    email: '',
+    name: '',
+    password: '',
+    repeatPassword: '',
+  };
+
+  handleChange = (event) => {
+    const name = event.target.name;
+    const val = event.target.value;
+    this.setState({ [name]: val });
+  };
+
+  handleSubmit = () => {
+    console.log(this.state);
+  };
+
+  componentDidMount() {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+      if (value !== this.state.password) {
+        return false;
+      }
+      return true;
+    });
+  }
+  componentWillUnmount() {
+    // remove rule when it is not needed
+    ValidatorForm.removeValidationRule('isPasswordMatch');
+  }
+
+  render() {
+    const { email, name, password, repeatPassword } = this.state;
+    return (
+      <ValidatorForm
+        ref='form'
+        onSubmit={this.handleSubmit}
+        onError={(errors) => console.log(errors)}
+      >
+        <LoginFormLayout>
+          <Typography variant='h4' color='primary'>
+            Signup
+          </Typography>
+          <Typography variant='h6'>
+            Create your account easy with less information.
+          </Typography>
+
+          <TextValidator
+            label='Email'
+            onChange={this.handleChange}
+            name='email'
+            value={email}
+            validators={['required', 'isEmail']}
+            errorMessages={['this field is required', 'email is not valid']}
+          />
+
+          <TextValidator
+            label='Name'
+            onChange={this.handleChange}
+            name='name'
+            value={name}
+            validators={['required']}
+            errorMessages={['this field is required']}
+          />
+
+          <TextValidator
+            label='Password'
+            onChange={this.handleChange}
+            type='password'
+            name='password'
+            value={password}
+            validators={['required']}
+            errorMessages={['this field is required']}
+          />
+
+          <TextValidator
+            label='Repeat password'
+            onChange={this.handleChange}
+            name='repeatPassword'
+            type='password'
+            validators={['isPasswordMatch', 'required']}
+            errorMessages={['password mismatch', 'this field is required']}
+            value={repeatPassword}
+          />
+          <Button type='submit' variant='contained' color='primary'>
+            Submit
+          </Button>
+        </LoginFormLayout>
+      </ValidatorForm>
+    );
+  }
+}
+
+export default LoginForm;
