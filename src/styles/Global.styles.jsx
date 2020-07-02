@@ -8,4 +8,5 @@ const GlobalStyles = createGlobalStyle`
         justify-content: space-around;
         align-items: center;
       }`;
+
 export default GlobalStyles;
