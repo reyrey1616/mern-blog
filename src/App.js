@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import LoginPage from './pages/Login/Login.page';
+import Spinner from './components/global/Spinner';
+import Navbar from './components/Navbar/Navbar';
+
+// Dynamic Imports
+const LoginPage = lazy(() => import('./pages/Login/Login.page'));
 
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
-        <Switch>
-          <Route path='/' component={LoginPage} />
-        </Switch>
-      </BrowserRouter>
+      <Suspense fallback={<Spinner />}>
+        <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route path='/' component={LoginPage} />
+          </Switch>
+        </BrowserRouter>
+      </Suspense>
     </div>
   );
 };
