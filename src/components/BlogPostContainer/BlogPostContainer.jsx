@@ -15,7 +15,7 @@ const BlogPostContainer = ({ data }) => {
   return (
     <div className={classes.root}>
       {data.map((item) => (
-        <BlogPost {...item} />
+        <BlogPost key={item.id} {...item} />
       ))}
     </div>
   );

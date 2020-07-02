@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
   MenuItem,
@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
+import TemporaryDrawer from '../Drawer/Drawer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,9 +39,14 @@ const Navbar = () => {
   const classes = useStyles();
   const theme = useTheme();
   const mediumSize = useMediaQuery(theme.breakpoints.down('md'));
+  const [isOpen, setOpen] = useState(false);
 
+  const setDrawer = (stat) => {
+    setOpen(stat);
+  };
   return (
     <div className={classes.root}>
+      <TemporaryDrawer isOpen={isOpen} setDrawer={setDrawer} />
       <AppBar position='static'>
         <Toolbar>
           <IconButton
@@ -48,6 +54,7 @@ const Navbar = () => {
             className={mediumSize ? classes.menuButton : classes.hide}
             color='inherit'
             aria-label='menu'
+            onClick={() => setDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
