@@ -39,8 +39,8 @@ const Homepage = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <CreateBlogForm />
-      <BlogPostContainer data={data} />
+      <CreateBlogForm isSignedIn={false} />
+      <BlogPostContainer data={data} isSignedIn={false} />
     </div>
   );
 };

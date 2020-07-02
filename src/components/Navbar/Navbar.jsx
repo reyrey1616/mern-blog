@@ -65,17 +65,17 @@ const Navbar = () => {
           <div className={mediumSize ? classes.hide : classes.flex}>
             <NavLink to='/' className={classes.links}>
               <MenuItem>
-                <ListItemText primary='Login' />
+                <ListItemText primary='Home' />
               </MenuItem>
             </NavLink>
-            <NavLink to='/' className={classes.links}>
+            <NavLink to='/login' className={classes.links}>
               <MenuItem>
                 <ListItemText primary='Login' />
               </MenuItem>
             </NavLink>
-            <NavLink to='/' className={classes.links}>
+            <NavLink to='/signup' className={classes.links}>
               <MenuItem>
-                <ListItemText primary='Login' />
+                <ListItemText primary='Signup' />
               </MenuItem>
             </NavLink>
           </div>

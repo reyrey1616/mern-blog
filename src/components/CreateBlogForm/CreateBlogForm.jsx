@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     margin: '1em',
   },
 });
-const CreateBlogForm = () => {
+const CreateBlogForm = ({ isSignedIn }) => {
   const classes = useStyles();
   const [data, setData] = useState('');
 
@@ -29,7 +29,7 @@ const CreateBlogForm = () => {
     alert('jahja');
   };
 
-  return (
+  return isSignedIn ? (
     <FormControl margin='normal' className={classes.root}>
       <TextareaAutosize
         label='Required'
@@ -50,7 +50,7 @@ const CreateBlogForm = () => {
         Post
       </Button>
     </FormControl>
-  );
+  ) : null;
 };
 
 export default CreateBlogForm;
