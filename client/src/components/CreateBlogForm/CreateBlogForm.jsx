@@ -27,7 +27,7 @@ const CreateBlogForm = ({ isSignedIn, setAlert }) => {
   const [data, setData] = useState('');
 
   const onSubmit = () => {
-    if (data === '') {
+    if (data.trim() === '') {
       setAlert('Please add a blog post', 'warning', 3000);
     }
   };
