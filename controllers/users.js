@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Users = require('../models/User');
 const asyncHandler = require('../middlewares/asyncHandler');
 
