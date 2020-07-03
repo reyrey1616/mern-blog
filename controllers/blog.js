@@ -22,7 +22,7 @@ exports.getBlogs = asyncHandler(async (req, res, next) => {
 // @route POST /api/blogs
 // @access Private
 
-exports.createBlogs = asyncHandler(async (req, res, next) => {
+exports.createBlog = asyncHandler(async (req, res, next) => {
   try {
     const blog = await Blogs.create(req.body);
 
