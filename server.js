@@ -25,9 +25,11 @@ connectDB();
 
 // ROUTES
 const users = require('./routes/users');
+const blogs = require('./routes/blogs');
 
 // MOUNT ROUTERS
 app.use('/api/users', users);
+app.use('/api/blogs', blogs);
 
 app.listen(PORT, (error) => {
   if (error) throw error;
