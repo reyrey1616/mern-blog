@@ -1,11 +1,5 @@
 import { SET_ALERT, REMOVE_ALERT } from './alerts.types';
-const INITIAL_STATE = [
-  {
-    id: 1,
-    type: 'error',
-    msg: 'Nicesu',
-  },
-];
+const INITIAL_STATE = [];
 
 export default function (state = INITIAL_STATE, action) {
   const { type, payload } = action;

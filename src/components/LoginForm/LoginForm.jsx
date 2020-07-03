@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { LoginFormLayout } from './LoginForm.styles';
+import { connect } from 'react-redux';
+import { setAlert } from '../../redux/alerts/alerts.actions';
 
 class LoginForm extends React.Component {
   state = {
@@ -16,7 +18,12 @@ class LoginForm extends React.Component {
   };
 
   handleSubmit = () => {
-    console.log(this.state);
+    const { email, password } = this.state;
+    if (email === 'rey@gmail.com' && password === 'rey') {
+      this.props.setAlert('Nice ya', 'success', 3000);
+    } else {
+      this.props.setAlert('Sala password', 'error', 3000);
+    }
   };
 
   render() {
@@ -61,4 +68,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+export default connect(null, { setAlert })(LoginForm);

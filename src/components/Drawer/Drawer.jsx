@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Divider } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   list: {
@@ -44,11 +45,21 @@ export default function TemporaryDrawer({ isOpen, setDrawer }) {
           </List>
           <Divider />
           <List>
-            {['Home', 'Login', 'Signup'].map((text) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
+            <NavLink to='/'>
+              <ListItem button>
+                <ListItemText primary='Home' />
               </ListItem>
-            ))}{' '}
+            </NavLink>
+            <NavLink to='/login'>
+              <ListItem button>
+                <ListItemText primary='Login' />
+              </ListItem>
+            </NavLink>
+            <NavLink to='/signup'>
+              <ListItem button>
+                <ListItemText primary='Signup' />
+              </ListItem>
+            </NavLink>
           </List>
         </div>
       </Drawer>

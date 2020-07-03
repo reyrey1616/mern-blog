@@ -5,6 +5,8 @@ import {
   makeStyles,
   Button,
 } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { setAlert } from '../../redux/alerts/alerts.actions';
 const useStyles = makeStyles({
   root: {
     padding: '1em',
@@ -20,13 +22,14 @@ const useStyles = makeStyles({
     margin: '1em',
   },
 });
-const CreateBlogForm = ({ isSignedIn }) => {
+const CreateBlogForm = ({ isSignedIn, setAlert }) => {
   const classes = useStyles();
   const [data, setData] = useState('');
 
   const onSubmit = () => {
-    console.log(data);
-    alert('jahja');
+    if (data === '') {
+      setAlert('Please add a blog post', 'warning', 3000);
+    }
   };
 
   return isSignedIn ? (
@@ -53,4 +56,4 @@ const CreateBlogForm = ({ isSignedIn }) => {
   ) : null;
 };
 
-export default CreateBlogForm;
+export default connect(null, { setAlert })(CreateBlogForm);
