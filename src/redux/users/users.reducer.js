@@ -1,8 +1,8 @@
-const INITIAL_STATE = {};
+// const INITIAL_STATE = {};
 
-export default function (state = INITIAL_STATE, action) {
-  const { type, payload } = action;
+// export default function (state = INITIAL_STATE, action) {
+//   const { type, payload } = action;
 
-  switch (type) {
-  }
-}
+//   switch (type) {
+//   }
+// }
