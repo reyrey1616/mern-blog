@@ -5,7 +5,7 @@ const crypto = require('crypto');
 //@desc  Login user
 //@route POST /api/auth/login
 //@access Public
-exports.login = asyncHandler(async (req, res, next) => {
+const login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
   // Validate email and password
@@ -55,4 +55,5 @@ const sendTokenResponse = (user, statusCode, res) => {
 
 module.exports = {
   sendTokenResponse,
+  login,
 };
