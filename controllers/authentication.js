@@ -1,6 +1,7 @@
 const Users = require('../models/User');
 const asyncHandler = require('../middlewares/asyncHandler');
 const crypto = require('crypto');
+const config = require('config');
 
 //@desc  Login user
 //@route POST /api/auth/login
@@ -33,24 +34,28 @@ const login = asyncHandler(async (req, res, next) => {
 
 // Utility function to send token response
 const sendTokenResponse = (user, statusCode, res) => {
-  // Create token
-  const token = user.getSignedJwtToken();
+  try {
+    // Create token
+    const token = user.getSignedJwtToken();
+    const jwt_cookie_expire = config.get('JWT_COOKIE_EXPIRE');
+    const process_env = config.get('NODE_ENV');
 
-  const options = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
+    const options = {
+      expires: new Date(Date.now() + jwt_cookie_expire * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    };
 
-  if (process.env.NODE_ENV === 'production') {
-    options.secure = true;
+    if (process_env === 'production') {
+      options.secure = true;
+    }
+
+    return res
+      .status(statusCode)
+      .cookie('token', token, options)
+      .json({ success: true, token });
+  } catch (error) {
+    console.log(error);
   }
-
-  res
-    .status(statusCode)
-    .cookie('token', token, options)
-    .json({ success: true, token });
 };
 
 module.exports = {
