@@ -1,7 +1,0 @@
-{
-  "MONGO_URI": "mongodb+srv://rey16devconnector:Generate123@rey16-kjzcf.mongodb.net/mern-blog?retryWrites=true&w=majority",
-  "JWT_SECRET": "EWJT3RTJGMEG",
-  "JWT_EXPIRE": "30d",
-  "JWT_COOKIE_EXPIRE": 30,
-  "NODE_ENV": "development"
-}
