@@ -33,11 +33,6 @@ exports.addUser = asyncHandler(async (req, res, next) => {
 
     const newUser = await Users.create(req.body);
 
-    // res.status(201).json({
-    //   success: true,
-    //   data: newUser,
-    // });
-
     sendTokenResponse(newUser, 201, res);
   } catch (error) {
     res.status(500).json({ error });
