@@ -1,6 +1,6 @@
 const Users = require('../models/User');
 const asyncHandler = require('../middlewares/asyncHandler');
-
+const sendTokenResponse = require('./authentication');
 // @desc GET ALL USERS
 // @route GET /api/users
 // @access Private
@@ -38,7 +38,7 @@ exports.addUser = asyncHandler(async (req, res, next) => {
     });
 
     await user.save();
-    res.status(201).json({ success: true, data: user });
+    sendTokenResponse(user, 200, res);
   } catch (error) {
     res.status(500).json({ error });
   }
