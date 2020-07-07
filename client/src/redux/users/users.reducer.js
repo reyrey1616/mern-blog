@@ -27,7 +27,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, currentUser: payload, loading: false };
     case REGISTER_FAILURE:
     case LOGIN_FAILURE:
-      return { ...state, loading: true };
+      return { ...state, loading: false, error: payload };
 
     default:
       return state;
