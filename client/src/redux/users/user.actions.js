@@ -9,6 +9,9 @@ import {
 
 export const addUser = (data) => {};
 
-export const loginStart = () => ({
-  type: LOGIN_START,
-});
+export const loginStart = (email, password) => {
+  return {
+    type: LOGIN_START,
+    payload: { email, password },
+  };
+};

@@ -4,7 +4,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { LoginFormLayout } from './LoginForm.styles';
 import { connect } from 'react-redux';
 import { setAlert } from '../../redux/alerts/alerts.actions';
-
+import { loginStart } from '../../redux/users/user.actions';
 class LoginForm extends React.Component {
   state = {
     email: '',
@@ -19,11 +19,8 @@ class LoginForm extends React.Component {
 
   handleSubmit = () => {
     const { email, password } = this.state;
-    if (email === 'rey@gmail.com' && password === 'rey') {
-      this.props.setAlert('Nice ya', 'success', 3000);
-    } else {
-      this.props.setAlert('Sala password', 'error', 3000);
-    }
+
+    this.props.login(email, password);
   };
 
   render() {
@@ -68,4 +65,13 @@ class LoginForm extends React.Component {
   }
 }
 
-export default connect(null, { setAlert })(LoginForm);
+// const mapDispatchToProps = (dispatch) => ({
+//   loginStart: (email, password) => dispatch(loginStart(email, password)),
+//   setAlert: (msg, type, timeout) => dispatch(setAlert(msg, type, timeout)),
+// });
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (email, password) => dispatch(loginStart(email, password)),
+});
+
+export default connect(null, mapDispatchToProps)(LoginForm);
