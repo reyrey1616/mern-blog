@@ -9,19 +9,21 @@ import {
   LOGIN_FAILURE,
 } from './user.types';
 
-import { loginStart } from './user.actions';
+import { loginStart, loginSuccess } from './user.actions';
 
 export function* login({ payload: { email, password } }) {
   try {
-    // const config = {
-    //   headers: {
-    //     'Content-type': 'application/json',
-    //   },
-    // };
-    // const body = JSON.stringify({ email, password });
-    // const res = yield axios.post('/api/auth/login', body, config);
-    console.log('hahas');
-    yield put(loginStart(email, password));
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+    const res = yield axios.post(
+      'http://localhost:5000/api/auth/login',
+      JSON.stringify({ email, password }),
+      config
+    );
+    yield put(loginSuccess(res.data));
   } catch (error) {
     console.log(error);
   }

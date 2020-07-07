@@ -21,6 +21,8 @@ export default function (state = INITIAL_STATE, action) {
     case LOGIN_START:
     case REGISTER_START:
       return { ...state, loading: true };
+    case LOGIN_SUCCESS:
+      return { ...state, currentUser: payload, loading: false };
     case REGISTER_SUCCESS:
       return { ...state, users: payload, loading: false };
     case LOGIN_SUCCESS:

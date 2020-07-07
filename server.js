@@ -1,14 +1,28 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
+const cors = require('cors');
 
 // INITIALIZE EXPRESS
 const app = express();
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// Request body parser
+app.get('/', function (req, res, next) {
+  res.json({ msg: 'This is CORS-enabled for all origins!' });
+});
 app.use(express.json());
+
+// Set up a whitelist and check against it:
+var whitelist = ['http://localhost:3000'];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 

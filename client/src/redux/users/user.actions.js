@@ -15,3 +15,10 @@ export const loginStart = (email, password) => {
     payload: { email, password },
   };
 };
+
+export const loginSuccess = (payload) => {
+  return {
+    type: LOGIN_SUCCESS,
+    payload,
+  };
+};
