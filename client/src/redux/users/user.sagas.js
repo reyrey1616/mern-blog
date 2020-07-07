@@ -25,6 +25,8 @@ export function* login({ payload: { email, password } }) {
       config
     );
 
+    console.log(res.data);
+
     yield put(loginSuccess(res.data));
     yield put(setAlert('Login Success', 'success', 3000));
   } catch (error) {

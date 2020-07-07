@@ -4,11 +4,15 @@ import Spinner from './components/global/Spinner';
 import Navbar from './components/Navbar/Navbar';
 import GlobalStyles from './styles/Global.styles';
 import Alerts from './components/global/Alerts/Alerts';
+import setAuthToken from './utils/setAuthToken';
 // Dynamic Imports
 const LoginPage = lazy(() => import('./pages/Login/Login.page'));
 const SignupPage = lazy(() => import('./pages/Signup/Signup.page'));
 const HomePage = lazy(() => import('./pages/Home/Home.page'));
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 const App = () => {
   return (
     <div>

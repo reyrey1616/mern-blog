@@ -52,7 +52,11 @@ const sendTokenResponse = (user, statusCode, res) => {
     return res
       .status(statusCode)
       .cookie('token', token, options)
-      .json({ success: true, token });
+      .json({
+        success: true,
+        token,
+        data: { name: user.name, email: user.email },
+      });
   } catch (error) {
     console.log(error);
   }

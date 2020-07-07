@@ -10,7 +10,11 @@ import {
 const INITIAL_STATE = {
   users: [],
   error: null,
-  currentUser: null,
+  isAuthenticated: false,
+  currentUser: {
+    token: localStorage.getItem('token'),
+    data: null,
+  },
   loading: true,
 };
 
@@ -22,7 +26,17 @@ export default function (state = INITIAL_STATE, action) {
     case REGISTER_START:
       return { ...state, loading: true };
     case LOGIN_SUCCESS:
-      return { ...state, currentUser: payload, loading: false };
+      alert(payload.token);
+      localStorage.setItem('token', payload.token);
+      return {
+        ...state,
+        currentUser: {
+          data: payload.data,
+          token: localStorage.getItem('token'),
+        },
+        isAuthenticated: true,
+        loading: false,
+      };
     case REGISTER_SUCCESS:
       return { ...state, users: payload, loading: false };
     case LOGIN_SUCCESS:
