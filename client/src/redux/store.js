@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './root.sagas';
 
 const sagaMiddleware = createSagaMiddleware();
-const middlewares = [sagaMiddleware];
+const middlewares = [thunk, sagaMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);

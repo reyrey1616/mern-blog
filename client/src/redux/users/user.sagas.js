@@ -10,6 +10,7 @@ import {
 } from './user.types';
 
 import { loginStart, loginSuccess } from './user.actions';
+import { setAlert } from '../alerts/alerts.actions';
 
 export function* login({ payload: { email, password } }) {
   try {
@@ -23,9 +24,11 @@ export function* login({ payload: { email, password } }) {
       JSON.stringify({ email, password }),
       config
     );
+
     yield put(loginSuccess(res.data));
+    yield put(setAlert('Login Success', 'success', 3000));
   } catch (error) {
-    console.log(error);
+    yield put(setAlert('Invalid Credentials', 'error', 3000));
   }
 }
 
