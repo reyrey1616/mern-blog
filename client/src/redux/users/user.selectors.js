@@ -11,3 +11,8 @@ export const selectAllUsers = createSelector(
   [selectUser],
   (users) => users.users
 );
+
+export const selectAuthenticated = createSelector(
+  [selectUser],
+  (users) => users.isAuthenticated
+);

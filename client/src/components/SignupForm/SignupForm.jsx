@@ -2,6 +2,10 @@ import React from 'react';
 import { Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { SignupFormLayout } from './SignupForm.styles';
+import { registerStart } from '../../redux/users/user.actions';
+import { connect } from 'react-redux';
+import AuthRedirect from '../HOC/AuthRedirect/AuthRedirect';
+import { compose } from 'redux';
 class SignupForm extends React.Component {
   state = {
     email: '',
@@ -18,6 +22,8 @@ class SignupForm extends React.Component {
 
   handleSubmit = () => {
     console.log(this.state);
+    const { email, name, password } = this.state;
+    this.props.register(email, name, password);
   };
 
   componentDidMount() {
@@ -95,4 +101,14 @@ class SignupForm extends React.Component {
   }
 }
 
-export default SignupForm;
+const mapDispatchToProps = (dispatch) => ({
+  register: (email, name, password) =>
+    dispatch(registerStart(email, name, password)),
+});
+
+const SignupFormContainer = compose(
+  connect(null, mapDispatchToProps),
+  AuthRedirect
+)(SignupForm);
+
+export default SignupFormContainer;

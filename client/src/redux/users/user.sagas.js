@@ -41,7 +41,7 @@ export function* register({ payload: { name, email, password } }) {
     };
 
     const res = yield axios.post(
-      'http://localhost:5000/api/auth/login',
+      'http://localhost:5000/api/users',
       JSON.stringify({ name, email, password }),
       config
     );
@@ -63,5 +63,5 @@ export function* onRegisterStart() {
 }
 
 export function* userSagas() {
-  yield all([call(onLoginStart), call(onLoginStart)]);
+  yield all([call(onLoginStart), call(onRegisterStart)]);
 }
