@@ -26,7 +26,7 @@ export default function (state = INITIAL_STATE, action) {
     case REGISTER_START:
       return { ...state, loading: true };
     case LOGIN_SUCCESS:
-      alert(payload.token);
+    case REGISTER_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {
         ...state,
@@ -37,10 +37,7 @@ export default function (state = INITIAL_STATE, action) {
         isAuthenticated: true,
         loading: false,
       };
-    case REGISTER_SUCCESS:
-      return { ...state, users: payload, loading: false };
-    case LOGIN_SUCCESS:
-      return { ...state, currentUser: payload, loading: false };
+
     case REGISTER_FAILURE:
     case LOGIN_FAILURE:
       return { ...state, loading: false, error: payload };

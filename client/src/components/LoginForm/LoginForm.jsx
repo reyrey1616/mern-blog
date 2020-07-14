@@ -3,7 +3,6 @@ import { Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { LoginFormLayout } from './LoginForm.styles';
 import { connect } from 'react-redux';
-import { setAlert } from '../../redux/alerts/alerts.actions';
 import { loginStart } from '../../redux/users/user.actions';
 class LoginForm extends React.Component {
   state = {
@@ -64,11 +63,6 @@ class LoginForm extends React.Component {
     );
   }
 }
-
-// const mapDispatchToProps = (dispatch) => ({
-//   loginStart: (email, password) => dispatch(loginStart(email, password)),
-//   setAlert: (msg, type, timeout) => dispatch(setAlert(msg, type, timeout)),
-// });
 
 const mapDispatchToProps = (dispatch) => ({
   login: (email, password) => dispatch(loginStart(email, password)),

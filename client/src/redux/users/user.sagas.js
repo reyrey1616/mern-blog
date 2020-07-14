@@ -1,15 +1,13 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import axios from 'axios';
-import {
-  REGISTER_START,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE,
-  LOGIN_START,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-} from './user.types';
+import { REGISTER_START, LOGIN_START } from './user.types';
 
-import { loginStart, loginSuccess } from './user.actions';
+import {
+  loginSuccess,
+  loginFailure,
+  registerSuccess,
+  registerFail,
+} from './user.actions';
 import { setAlert } from '../alerts/alerts.actions';
 
 export function* login({ payload: { email, password } }) {
@@ -34,9 +32,36 @@ export function* login({ payload: { email, password } }) {
   }
 }
 
+export function* register({ payload: { name, email, password } }) {
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+
+    const res = yield axios.post(
+      'http://localhost:5000/api/auth/login',
+      JSON.stringify({ name, email, password }),
+      config
+    );
+
+    console.log(res.data);
+    yield put(registerSuccess(res.data));
+  } catch (error) {
+    yield put(setAlert('Error on creating account', 'error', 3000));
+    yield put(registerFail(error));
+  }
+}
+
 export function* onLoginStart() {
   yield takeLatest(LOGIN_START, login);
 }
+
+export function* onRegisterStart() {
+  yield takeLatest(REGISTER_START, register);
+}
+
 export function* userSagas() {
-  yield all([call(onLoginStart)]);
+  yield all([call(onLoginStart), call(onLoginStart)]);
 }
