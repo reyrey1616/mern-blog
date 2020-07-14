@@ -4,7 +4,7 @@ import { REGISTER_START, LOGIN_START } from './user.types';
 
 import {
   loginSuccess,
-  loginFailure,
+  loginFail,
   registerSuccess,
   registerFail,
 } from './user.actions';
@@ -29,6 +29,7 @@ export function* login({ payload: { email, password } }) {
     yield put(setAlert('Login Success', 'success', 3000));
   } catch (error) {
     yield put(setAlert('Invalid Credentials', 'error', 3000));
+    yield put(loginFail(error));
   }
 }
 

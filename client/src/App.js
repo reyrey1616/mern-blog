@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import GlobalStyles from './styles/Global.styles';
 import Alerts from './components/global/Alerts/Alerts';
 import setAuthToken from './utils/setAuthToken';
+import PrivateRoute from './components/HOC/PrivateRoute/PrivateRoute';
 // Dynamic Imports
 const LoginPage = lazy(() => import('./pages/Login/Login.page'));
 const SignupPage = lazy(() => import('./pages/Signup/Signup.page'));
@@ -23,9 +24,11 @@ const App = () => {
           <Alerts />
 
           <Switch>
-            <Route path='/login' component={LoginPage} />
-            <Route path='/signup' component={SignupPage} />
-            <Route path='/' component={HomePage} />
+            <Route path='/login' exact component={LoginPage} />
+            <Route path='/signup' exact component={SignupPage} />
+            {/* <Route path='/' exact component={HomePage} /> */}
+
+            <PrivateRoute path='/' exact component={HomePage} />
           </Switch>
         </BrowserRouter>
       </Suspense>

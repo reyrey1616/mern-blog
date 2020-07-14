@@ -16,3 +16,10 @@ export const selectAuthenticated = createSelector(
   [selectUser],
   (users) => users.isAuthenticated
 );
+
+export const selectLoading = createSelector(
+  [selectAllUsers],
+  (users) => users.loading
+);
+
+export const selectUserReducer = createSelector([selectUser], (users) => users);
