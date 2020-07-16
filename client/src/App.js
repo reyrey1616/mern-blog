@@ -7,6 +7,7 @@ import Alerts from './components/global/Alerts/Alerts';
 import setAuthToken from './utils/setAuthToken';
 import PrivateRoute from './components/HOC/PrivateRoute/PrivateRoute';
 import store from './redux/store';
+import { loadUser } from './redux/users/user.actions';
 // Dynamic Imports
 const LoginPage = lazy(() => import('./pages/Login/Login.page'));
 const SignupPage = lazy(() => import('./pages/Signup/Signup.page'));
@@ -17,7 +18,7 @@ if (localStorage.token) {
 }
 
 useEffect(() => {
-  // store.dispatch(loadUser());
+  store.dispatch(loadUser());
 }, []);
 
 const App = () => {

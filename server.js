@@ -40,12 +40,12 @@ connectDB();
 // ROUTES
 const users = require('./routes/users');
 const blogs = require('./routes/blogs');
-const auth = require('./routes/authentication');
+const authentication = require('./routes/authentication');
 
 // MOUNT ROUTERS
 app.use('/api/users', users);
 app.use('/api/blogs', blogs);
-app.use('/api/auth', auth);
+app.use('/api/auth', authentication);
 
 app.listen(PORT, (error) => {
   if (error) throw error;

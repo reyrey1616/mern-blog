@@ -5,7 +5,24 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOAD_USER_START,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_FAIL,
 } from './user.types';
+
+export const loadUserStart = () => ({
+  type: LOAD_USER_START,
+});
+
+export const loadUserSuccess = (payload) => ({
+  type: LOAD_USER_START,
+  payload,
+});
+
+export const loadUserFail = (error) => ({
+  type: LOAD_USER_START,
+  payload: error,
+});
 
 export const loginStart = (email, password) => ({
   type: LOGIN_START,

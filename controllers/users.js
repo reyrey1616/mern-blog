@@ -1,16 +1,31 @@
 const Users = require('../models/User');
 const asyncHandler = require('../middlewares/asyncHandler');
 const { sendTokenResponse } = require('./authentication');
-// @desc GET ALL USERS
+// // @desc GET ALL USERS
+// // @route GET /api/users
+// // @access Private
+// exports.getUsers = asyncHandler(async (req, res, next) => {
+//   try {
+//     const users = await Users.find();
+//     return res.status(200).json({
+//       success: true,
+//       count: users.length,
+//       data: users,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ error });
+//   }
+// });
+
+// @desc GET SINGLE USER
 // @route GET /api/users
 // @access Private
-exports.getUsers = asyncHandler(async (req, res, next) => {
+exports.getUser = asyncHandler(async (req, res, next) => {
   try {
-    const users = await Users.find();
+    const user = await Users.findById(req.user.id).select('-password');
     return res.status(200).json({
       success: true,
-      count: users.length,
-      data: users,
+      data: user,
     });
   } catch (error) {
     res.status(500).json({ error });
