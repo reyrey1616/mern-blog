@@ -5,6 +5,9 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOAD_USER_START,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_FAIL,
 } from './user.types';
 
 const INITIAL_STATE = {
@@ -24,9 +27,11 @@ export default function (state = INITIAL_STATE, action) {
   switch (type) {
     case LOGIN_START:
     case REGISTER_START:
+    case LOAD_USER_START:
       return { ...state, loading: true };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
+    case LOAD_USER_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {
         ...state,
@@ -39,6 +44,7 @@ export default function (state = INITIAL_STATE, action) {
       };
     case REGISTER_FAILURE:
     case LOGIN_FAILURE:
+    case LOAD_USER_FAIL:
       return { ...state, loading: false, error: payload };
 
     default:

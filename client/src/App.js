@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Spinner from './components/global/Spinner';
 import Navbar from './components/Navbar/Navbar';
 import GlobalStyles from './styles/Global.styles';
@@ -7,7 +8,7 @@ import Alerts from './components/global/Alerts/Alerts';
 import setAuthToken from './utils/setAuthToken';
 import PrivateRoute from './components/HOC/PrivateRoute/PrivateRoute';
 import store from './redux/store';
-import { loadUser } from './redux/users/user.actions';
+import { loadUserStart } from './redux/users/user.actions';
 // Dynamic Imports
 const LoginPage = lazy(() => import('./pages/Login/Login.page'));
 const SignupPage = lazy(() => import('./pages/Signup/Signup.page'));
@@ -17,11 +18,11 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-useEffect(() => {
-  store.dispatch(loadUser());
-}, []);
+const App = ({ loadCurrentUser }) => {
+  // useEffect(() => {
+  //   loadCurrentUser();
+  // }, [loadCurrentUser]);
 
-const App = () => {
   return (
     <div>
       <GlobalStyles />
@@ -43,4 +44,7 @@ const App = () => {
   );
 };
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  loadCurrentUser: () => dispatch(loadUserStart()),
+});
+export default connect(null, mapDispatchToProps)(App);
