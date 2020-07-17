@@ -15,12 +15,12 @@ export const loadUserStart = () => ({
 });
 
 export const loadUserSuccess = (payload) => ({
-  type: LOAD_USER_START,
+  type: LOAD_USER_SUCCESS,
   payload,
 });
 
 export const loadUserFail = (error) => ({
-  type: LOAD_USER_START,
+  type: LOAD_USER_FAIL,
   payload: error,
 });
 
