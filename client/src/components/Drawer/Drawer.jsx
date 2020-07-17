@@ -6,6 +6,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Divider } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectAuthenticated } from '../../redux/users/user.selectors';
 
 const useStyles = makeStyles({
   list: {
@@ -16,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemporaryDrawer({ isOpen, setDrawer }) {
+function TemporaryDrawer({ isOpen, setDrawer, isAuthenticated }) {
   const classes = useStyles();
 
   const toggleDrawer = (stat) => (event) => {
@@ -50,19 +53,29 @@ export default function TemporaryDrawer({ isOpen, setDrawer }) {
                 <ListItemText primary='Home' />
               </ListItem>
             </NavLink>
-            <NavLink to='/login'>
-              <ListItem button>
-                <ListItemText primary='Login' />
-              </ListItem>
-            </NavLink>
-            <NavLink to='/signup'>
-              <ListItem button>
-                <ListItemText primary='Signup' />
-              </ListItem>
-            </NavLink>
+            {!isAuthenticated && (
+              <NavLink to='/login'>
+                <ListItem button>
+                  <ListItemText primary='Login' />
+                </ListItem>
+              </NavLink>
+            )}
+            {!isAuthenticated && (
+              <NavLink to='/signup'>
+                <ListItem button>
+                  <ListItemText primary='Signup' />
+                </ListItem>
+              </NavLink>
+            )}
           </List>
         </div>
       </Drawer>
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectAuthenticated,
+});
+
+export default connect(mapStateToProps)(TemporaryDrawer);
