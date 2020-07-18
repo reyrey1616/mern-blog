@@ -11,6 +11,6 @@ export const addPostSuccess = (payload) => ({
 });
 
 export const addPostFail = (error) => ({
-  type: ADD_POST_START,
+  type: ADD_POST_FAIL,
   payload: error,
 });
