@@ -1,5 +1,8 @@
 import { createSelector } from 'reselect';
 
-const selectPosts = (state) => state.posts;
+export const selectPosts = (state) => state.posts;
 
-const selectAllPosts = createSelector([selectPosts], (posts) => posts.posts);
+export const selectAllPosts = createSelector(
+  [selectPosts],
+  (posts) => posts.posts
+);
