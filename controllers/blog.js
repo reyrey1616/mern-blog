@@ -24,11 +24,12 @@ exports.getBlogs = asyncHandler(async (req, res, next) => {
 
 exports.createBlog = asyncHandler(async (req, res, next) => {
   try {
+    console.log(req.body);
     const blog = await Blogs.create(req.body);
 
     return res.status(201).json({
       success: true,
-      data: blog,
+      blog,
     });
   } catch (error) {
     return res.status(500).json({ error });

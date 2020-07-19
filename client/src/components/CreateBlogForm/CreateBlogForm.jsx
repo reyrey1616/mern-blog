@@ -7,6 +7,8 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setAlert } from '../../redux/alerts/alerts.actions';
+import { addPostStart } from '../../redux/posts/posts.actions';
+
 const useStyles = makeStyles({
   root: {
     padding: '1em',
@@ -22,13 +24,15 @@ const useStyles = makeStyles({
     margin: '1em',
   },
 });
-const CreateBlogForm = ({ isSignedIn, setAlert }) => {
+const CreateBlogForm = ({ isSignedIn, setAlert, addPost }) => {
   const classes = useStyles();
   const [data, setData] = useState('');
 
   const onSubmit = () => {
     if (data.trim() === '') {
       setAlert('Please add a blog post', 'warning', 3000);
+    } else {
+      addPost(data);
     }
   };
 
@@ -56,4 +60,12 @@ const CreateBlogForm = ({ isSignedIn, setAlert }) => {
   ) : null;
 };
 
-export default connect(null, { setAlert })(CreateBlogForm);
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addPostStart: (content) => dispatch(addPostStart()),
+//   };
+// };
+
+export default connect(null, { setAlert, addPost: addPostStart })(
+  CreateBlogForm
+);

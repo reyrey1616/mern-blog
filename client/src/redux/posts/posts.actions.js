@@ -1,9 +1,11 @@
 import { ADD_POST_START, ADD_POST_SUCCESS, ADD_POST_FAIL } from './posts.types';
 
-export const addPostStart = (payload) => ({
-  type: ADD_POST_START,
-  payload,
-});
+export const addPostStart = (content) => (dispatch) => {
+  dispatch({
+    type: ADD_POST_START,
+    payload: content,
+  });
+};
 
 export const addPostSuccess = (payload) => ({
   type: ADD_POST_SUCCESS,
