@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CreateBlogForm from '../../components/CreateBlogForm/CreateBlogForm';
 import BlogPostContainer from '../../components/BlogPostContainer/BlogPostContainer';
 import { makeStyles } from '@material-ui/core';
-
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectAllPosts } from '../../redux/posts/posts.selectors';
+import { getPostsStart } from '../../redux/posts/posts.actions';
 const data = [
   {
     id: 1,
@@ -35,8 +38,12 @@ const useStyles = makeStyles({
     padding: '1em',
   },
 });
-const Homepage = () => {
+const Homepage = ({ getPosts, posts }) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    getPosts();
+  }, []);
   return (
     <div className={classes.root}>
       <CreateBlogForm isSignedIn={true} />
@@ -45,4 +52,12 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+const mapStateToProps = createStructuredSelector({
+  posts: selectAllPosts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getPosts: () => dispatch(getPostsStart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
