@@ -12,7 +12,7 @@ exports.getBlogs = asyncHandler(async (req, res, next) => {
     return res.status(200).json({
       success: true,
       count: blogs.length,
-      data: blogs,
+      blogs,
     });
   } catch (error) {
     return res.status(500).json({ error });
@@ -26,7 +26,6 @@ exports.getBlogs = asyncHandler(async (req, res, next) => {
 exports.createBlog = asyncHandler(async (req, res, next) => {
   try {
     const postedBy = await User.findById(req.user);
-    console.log(postedBy);
     const newBlog = new Blogs({
       user: postedBy,
       content: req.body.content,
