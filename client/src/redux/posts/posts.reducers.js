@@ -15,5 +15,8 @@ export default function (state = INITIAL_STATE, payload) {
       return { ...state, posts: state.posts.push(payload), loading: false };
     case ADD_POST_FAIL:
       return { ...state, error: payload, loading: false };
+
+    default:
+      return state;
   }
 }

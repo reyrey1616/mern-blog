@@ -12,6 +12,9 @@ import {
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 import TemporaryDrawer from '../Drawer/Drawer';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectAuthenticated } from '../../redux/users/user.selectors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated }) => {
   const classes = useStyles();
   const theme = useTheme();
   const mediumSize = useMediaQuery(theme.breakpoints.down('md'));
@@ -68,16 +71,20 @@ const Navbar = () => {
                 <ListItemText primary='Home' />
               </MenuItem>
             </NavLink>
-            <NavLink to='/login' className={classes.links}>
-              <MenuItem>
-                <ListItemText primary='Login' />
-              </MenuItem>
-            </NavLink>
-            <NavLink to='/signup' className={classes.links}>
-              <MenuItem>
-                <ListItemText primary='Signup' />
-              </MenuItem>
-            </NavLink>
+            {!isAuthenticated && (
+              <NavLink to='/login' className={classes.links}>
+                <MenuItem>
+                  <ListItemText primary='Login' />
+                </MenuItem>
+              </NavLink>
+            )}
+            {!isAuthenticated && (
+              <NavLink to='/signup' className={classes.links}>
+                <MenuItem>
+                  <ListItemText primary='Signup' />
+                </MenuItem>
+              </NavLink>
+            )}
           </div>
         </Toolbar>
       </AppBar>
@@ -85,4 +92,8 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectAuthenticated,
+});
+
+export default connect(mapStateToProps)(Navbar);
