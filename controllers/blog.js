@@ -1,5 +1,6 @@
 const Blogs = require('../models/Blog');
 const asyncHandler = require('../middlewares/asyncHandler');
+const User = require('../models/User');
 
 // @desc GET ALL BLOGS
 // @route GET /api/blogs
@@ -24,8 +25,14 @@ exports.getBlogs = asyncHandler(async (req, res, next) => {
 
 exports.createBlog = asyncHandler(async (req, res, next) => {
   try {
-    console.log(req.body);
-    const blog = await Blogs.create(req.body);
+    const postedBy = await User.findById(req.user);
+    console.log(postedBy);
+    const newBlog = new Blogs({
+      user: postedBy,
+      content: req.body.content,
+    });
+
+    const blog = await newBlog.save();
 
     return res.status(201).json({
       success: true,
