@@ -43,6 +43,7 @@ const Homepage = ({ getPosts, posts }) => {
 
   useEffect(() => {
     getPosts();
+    console.log(posts);
   }, []);
   return (
     <div className={classes.root}>

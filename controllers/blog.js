@@ -28,7 +28,10 @@ exports.createBlog = asyncHandler(async (req, res, next) => {
     const postedBy = await User.findById(req.user);
     const newBlog = new Blogs({
       user: postedBy,
+      name: postedBy.name,
+      email: postedBy.email,
       content: req.body.content,
+      avatar: `https://robohash.org/${Math.ceil(Math.random() * 1000)}`,
     });
 
     const blog = await newBlog.save();

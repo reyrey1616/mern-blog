@@ -31,7 +31,6 @@ export function* addPost({ payload: content }) {
 export function* getPosts() {
   try {
     const res = yield axios.get('http://localhost:5000/api/blogs');
-    console.log(res);
     yield put(getPostsSuccess(res.data));
   } catch (error) {
     yield put(getPostsFail(error));
