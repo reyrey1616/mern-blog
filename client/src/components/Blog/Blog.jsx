@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     padding: '.5em !important',
   },
 });
-const Blog = ({ name, dateTime, content, imageUrl, own }) => {
+const Blog = ({ name, date, content, avatar, own }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOpen = (event) => {
@@ -56,7 +56,7 @@ const Blog = ({ name, dateTime, content, imageUrl, own }) => {
         <MenuItem onClick={handleClose}>Delete</MenuItem>
       </Menu>
       <CardHeader
-        avatar={<Avatar alt={name} src={imageUrl} />}
+        avatar={<Avatar alt={name} src={avatar} />}
         action={
           own && (
             <IconButton aria-label='settings' onClick={handleOpen}>
@@ -65,7 +65,7 @@ const Blog = ({ name, dateTime, content, imageUrl, own }) => {
           )
         }
         title={name}
-        subheader={dateTime}
+        subheader={date}
       />
       <CardContent className={classes.content}>
         <Typography variant='body2' color='textSecondary' component='p'>

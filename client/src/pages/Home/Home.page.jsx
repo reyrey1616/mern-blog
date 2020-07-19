@@ -43,12 +43,11 @@ const Homepage = ({ getPosts, posts }) => {
 
   useEffect(() => {
     getPosts();
-    console.log(posts);
-  }, []);
+  }, [getPosts]);
   return (
     <div className={classes.root}>
       <CreateBlogForm isSignedIn={true} />
-      <BlogPostContainer data={data} isSignedIn={true} />
+      <BlogPostContainer data={posts} isSignedIn={true} />
     </div>
   );
 };
