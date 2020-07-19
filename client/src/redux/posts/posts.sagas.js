@@ -22,8 +22,7 @@ export function* addPost({ payload: content }) {
       config
     );
 
-    console.log(res.data.blog);
-    yield put(addPostSuccess(res.data));
+    yield put(addPostSuccess({ blogs: res.data.blogs, count: res.data.count }));
   } catch (error) {
     yield put(addPostFail(error));
   }
